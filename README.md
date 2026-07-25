@@ -17,6 +17,7 @@
 ## Documentation
 
 - [Hardware Overview](01-Hardware/hardware-overview.md)
+- [Infrastructure Architecture](02-Network/infrastructure-architecture.md)
 
 ## Current Services
 - Pi-hole
