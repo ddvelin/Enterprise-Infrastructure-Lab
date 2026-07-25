@@ -14,6 +14,10 @@
 - Ansible
 - Bash
 
+## Documentation
+
+- [Hardware Overview](01-Hardware/hardware-overview.md)
+
 ## Current Services
 - Pi-hole
 - Game server VMs
