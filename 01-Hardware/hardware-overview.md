@@ -21,8 +21,10 @@ This lab was built to provide a safe, hands-on environment for learning virtuali
 |---|---|---|
 | Router | Verizon-provided ISP router | Provides internet access, DHCP services, and the routing features available through the ISP interface |
 | Managed Switch | Netgear 5-port managed Gigabit Ethernet switch | Connects the main workstation and Proxmox host while providing port management, QoS, link-speed configuration, and traffic prioritization |
-| Structured Link | Long-run Cat6-class Ethernet cable from the router area to the office | Provides a wired uplink between the ISP router and the managed office switch |
+| Structured Link | Long-run shielded Ethernet cable sold and labeled as Cat6e | Provides a wired uplink between the ISP router and office switch; selected for added resistance to electromagnetic interference and future network-speed headroom |
 | Connected Systems | Main workstation and Proxmox server | Currently uses a simple two-device switched topology while leaving room for future expansion |
+
+> **Cabling note:** Cat6e is a vendor-used label rather than a formally recognized TIA cabling category. The installed cable is documented by its purchased label and shielding characteristics. Current throughput is limited by the Gigabit Ethernet interfaces on the router and managed switch.
 
 ## Current Switch Configuration
 
