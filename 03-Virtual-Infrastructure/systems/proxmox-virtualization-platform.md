@@ -22,6 +22,90 @@ Every new service follows a standardized deployment workflow that includes monit
 
 ---
 
+# Quick Facts
+
+| Property | Value |
+|---|---|
+| Platform Role | Primary virtualization host |
+| Hostname | `pve` |
+| Cluster | `HomeLab-Cluster` (single node) |
+| Hypervisor | Proxmox VE 9.1.4 |
+| Base OS | Debian 13 (Trixie) |
+| Kernel | Linux 6.17.4-2-pve |
+| CPU | Intel Core i7-8700K (6 cores / 12 threads) |
+| Memory | 32 GB DDR4 |
+| Motherboard | MSI Z370 PC PRO (MS-7B49) |
+| Network Adapter | Intel I219-V Gigabit Ethernet |
+| Cooling | Air cooler |
+| Power Supply | 800 W ATX |
+| Chassis | Mid-tower gaming case with glass side panel |
+| Host Operation | Headless |
+| Management | Proxmox Web UI, SSH, and Twingate |
+| Monitoring | Netdata |
+| Backup Platform | Proxmox Backup Server |
+
+---
+
+# Storage Architecture
+
+The host uses two NVMe drives with different operational roles. Active virtualization workloads remain on the primary drive, while the secondary device provides a separate local backup-storage target.
+
+## Primary NVMe Storage
+
+| Property | Value |
+|---|---|
+| Device | `/dev/nvme0n1` |
+| Model | WD Black SN7100 |
+| Advertised Capacity | 1 TB |
+| Usable Capacity | Approximately 931.5 GiB |
+| Filesystem / Layout | Proxmox LVM and LVM-thin storage with an ext4 root filesystem |
+| Primary Roles | Proxmox operating system, VM disks, LXC disks, and active workloads |
+
+The Proxmox root filesystem is allocated approximately 93.9 GiB, with the remaining capacity used through the host's configured local and LVM-thin storage targets.
+
+## Secondary NVMe Storage
+
+| Property | Value |
+|---|---|
+| Device | `/dev/nvme1n1` |
+| Model | WDC WDS256G1X0C-00ENX0 |
+| Advertised Capacity | 256 GB |
+| Usable Capacity | Approximately 238.5 GiB |
+| Proxmox Storage Name | `NVMe-256GB` |
+| Primary Role | Separate local backup-storage location |
+
+Separating backup data from the active VM storage reduces the chance that a failure of the primary workload disk will also remove the most recent local recovery point. This is useful for fast recovery, although both devices remain inside the same physical host and therefore do not provide protection against complete host loss, theft, fire, or electrical damage.
+
+## Storage Monitoring
+
+Current storage-health checks include:
+
+- NVMe temperature monitoring
+- Disk utilization review through Proxmox and Netdata
+- Backup-job validation through Proxmox Backup Server
+- Capacity planning based on VM growth and retention needs
+
+The secondary NVMe has operated warmer than the primary drive, making airflow and drive-temperature monitoring important until the platform is moved into a chassis with improved storage cooling.
+
+## Current Limitations
+
+- The operating system and active workloads share the primary NVMe device.
+- The local backup device is physically installed in the same host.
+- The 256 GB backup target limits long-term local retention.
+- Storage is not currently mirrored.
+- The environment does not yet use shared NAS or SAN storage.
+
+## Future Improvements
+
+- Increase backup-storage capacity.
+- Add a dedicated TrueNAS system for centralized storage.
+- Maintain an additional off-host or off-site backup copy.
+- Improve NVMe airflow and temperature monitoring.
+- Evaluate mirrored storage for critical host workloads.
+- Document tested recovery procedures for complete primary-drive failure.
+
+---
+
 # Network Architecture
 
 The Proxmox host uses a single Intel I219-V Gigabit Ethernet adapter connected to the managed office switch.
