@@ -18,6 +18,7 @@
 
 - [Hardware Overview](01-Hardware/hardware-overview.md)
 - [Infrastructure Architecture](02-Network/infrastructure-architecture.md)
+- [Proxmox Virtualization Platform](03-Virtual-Infrastructure/systems/proxmox-virtualization-platform.md)
 
 ## Current Services
 - Pi-hole
