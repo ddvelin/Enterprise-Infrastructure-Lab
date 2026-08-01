@@ -1,0 +1,16 @@
+# Sanitized Palworld configuration example.
+# Keep the real file outside Git and restrict its permissions.
+
+SERVICE_NAME="palworld"
+SERVER_USER="gameserver"
+SERVER_DIR="/home/gameserver/Steam/steamapps/common/PalServer"
+STEAMCMD="/usr/games/steamcmd"
+STEAM_APP_ID="2394010"
+GAME_PORT="8211"
+
+RCON_HOST="127.0.0.1"
+RCON_PORT="25575"
+RCON_PASSWORD="REPLACE_LOCALLY"
+
+PLAYIT_SERVICE="playit"
+LOG_DIR="/home/gameserver/palworld-management/logs"
