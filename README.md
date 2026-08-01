@@ -46,14 +46,16 @@
 
 ## 🎮 Hosted Services
 
+See the [Hosted Game Server Labs index](04-Hosted-Services/) for the complete portfolio section.
+
 | Service | Status |
 |----------|--------|
 | [Cozy Zen Modded Minecraft Automation Lab](04-Hosted-Services/cozy-zen-minecraft/) | ✅ Documented |
-| ATM10 | 🚧 Documentation Planned |
-| Palworld | 🚧 Documentation Planned |
-| Enshrouded | 🚧 Documentation Planned |
+| [ATM10 Modded Minecraft Server Lab](04-Hosted-Services/atm10-minecraft/) | ✅ Documented |
+| [Palworld Dedicated Server Lab](04-Hosted-Services/palworld/) | ✅ Documented |
+| [Enshrouded Dedicated Server Lab](04-Hosted-Services/enshrouded/) | ✅ Documented |
 
-The Cozy Zen project includes sanitized Bash automation, systemd service and timer examples, backup and restore procedures, health monitoring, watchdog recovery, RCON administration, and a terminal status dashboard.
+The hosted-service projects include sanitized Bash scripts, systemd examples, backup and recovery procedures, health monitoring, SteamCMD workflows, RCON administration, Wine-based hosting, Playit.gg connectivity, resource tuning, and troubleshooting documentation.
 
 ---
 
@@ -93,6 +95,7 @@ The Cozy Zen project includes sanitized Bash automation, systemd service and tim
 - Ansible
 - systemd Services and Timers
 - RCON
+- SteamCMD
 - Discord Webhooks
 - Cron
 - Automated VM Maintenance
@@ -103,6 +106,14 @@ The Cozy Zen project includes sanitized Bash automation, systemd service and tim
 - Pulse
 - Proxmox Monitoring
 - Custom Bash Health Checks and Status Dashboards
+- Spark Minecraft Profiling
+
+## Game Server Platforms
+
+- Minecraft Forge and NeoForge
+- Palworld Dedicated Server
+- Enshrouded Dedicated Server
+- Wine and Xvfb
 
 ---
 
@@ -124,12 +135,12 @@ The Cozy Zen project includes sanitized Bash automation, systemd service and tim
 - [ ] Pulse Documentation
 - [ ] Ansible Documentation
 
-## Phase 3 — Hosted Services
+## Phase 3 — Hosted Services ✅
 
 - [x] Cozy Zen Modded Minecraft Automation Lab
-- [ ] ATM10
-- [ ] Palworld
-- [ ] Enshrouded
+- [x] ATM10 Modded Minecraft Server Lab
+- [x] Palworld Dedicated Server Lab
+- [x] Enshrouded Dedicated Server Lab
 
 ## Phase 4 — Enterprise Features
 
@@ -142,6 +153,19 @@ The Cozy Zen project includes sanitized Bash automation, systemd service and tim
 - [ ] Draw.io Network Diagrams
 - [ ] Rack Elevation Diagram
 - [ ] Configuration Management Database (CMDB)
+
+---
+
+# 🔐 Public Repository Privacy Standard
+
+Configuration and code examples are sanitized before publication. This repository does not include:
+
+- Passwords, tokens, webhook URLs, or SSH keys
+- Internal or public IP addresses
+- Playit tunnel hostnames or claim information
+- Player names, UUIDs, or whitelist contents
+- World files, savegames, backups, or production logs
+- Copyrighted game binaries, server packs, or mod files
 
 ---
 
