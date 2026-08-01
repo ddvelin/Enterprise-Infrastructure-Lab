@@ -1,0 +1,19 @@
+[Unit]
+Description=ATM10 Modded Minecraft Server
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=gameserver
+WorkingDirectory=/home/gameserver/atm10
+ExecStart=/home/gameserver/atm10/startserver.sh
+Restart=on-failure
+RestartSec=30
+TimeoutStopSec=300
+SuccessExitStatus=0 143
+
+[Install]
+WantedBy=multi-user.target

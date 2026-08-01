@@ -1,0 +1,19 @@
+[Unit]
+Description=Palworld Dedicated Server
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=gameserver
+WorkingDirectory=/home/gameserver/Steam/steamapps/common/PalServer
+ExecStart=/home/gameserver/Steam/steamapps/common/PalServer/PalServer.sh
+Restart=on-failure
+RestartSec=30
+TimeoutStopSec=180
+SuccessExitStatus=0 143
+
+[Install]
+WantedBy=multi-user.target
