@@ -1,0 +1,10 @@
+[Unit]
+Description=ATM10 Health Check and Recovery
+After=network-online.target atm10.service
+
+[Service]
+Type=oneshot
+User=root
+Environment=CONFIG_FILE=/home/gameserver/atm10-config/server.conf
+Environment=HEALTHCHECK=/home/gameserver/atm10-scripts/healthcheck.sh
+ExecStart=/home/gameserver/atm10-scripts/watchdog.sh
