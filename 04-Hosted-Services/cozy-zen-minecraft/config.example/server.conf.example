@@ -1,0 +1,22 @@
+# Copy this file to a local path such as:
+#   ~/game-server/config/server.conf
+# Never commit the real file because it contains the RCON password.
+
+SERVER_NAME="Example Minecraft Server"
+SERVICE_NAME="example-minecraft"
+
+SERVER_DIR="/home/gameserver/game-server/server"
+BACKUP_DIR="/home/gameserver/game-server/backups"
+LOG_DIR="/home/gameserver/game-server/logs"
+RUN_DIR="/home/gameserver/game-server/run"
+
+RCON_HOST="127.0.0.1"
+RCON_PORT="25575"
+RCON_PASS="REPLACE_WITH_A_LONG_RANDOM_PASSWORD"
+
+MINECRAFT_PORT="25565"
+BACKUP_RETENTION_DAYS="7"
+DISK_WARNING_PERCENT="80"
+DISK_CRITICAL_PERCENT="90"
+MEMORY_WARNING_MB="1024"
+MEMORY_CRITICAL_MB="512"
