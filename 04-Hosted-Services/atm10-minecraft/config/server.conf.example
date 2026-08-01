@@ -1,0 +1,19 @@
+# Sanitized example only. Do not commit real passwords, IP addresses,
+# Discord webhook URLs, player names, UUIDs, or Playit tunnel details.
+
+SERVER_NAME="ATM10 Minecraft"
+SERVICE_NAME="atm10"
+SERVER_DIR="/home/gameserver/atm10"
+BACKUP_DIR="/home/gameserver/backups/atm10"
+LOG_DIR="/home/gameserver/logs"
+STATE_FILE="/home/gameserver/run/atm10-watchdog.state"
+
+GAME_PORT="25565"
+RCON_HOST="127.0.0.1"
+RCON_PORT="25575"
+RCON_PASSWORD="REPLACE_LOCALLY"
+
+BACKUP_RETENTION_HOURS="24"
+MAX_FAILURES="3"
+RESTART_WAIT_SECONDS="45"
+DISCORD_WEBHOOK_URL="REPLACE_LOCALLY_OR_LEAVE_EMPTY"
