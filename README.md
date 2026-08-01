@@ -1,198 +1,175 @@
-# 🖥️ Enterprise Infrastructure Lab
+# Damian's Enterprise Infrastructure Portfolio
 
-> A production-inspired homelab focused on enterprise infrastructure, networking, Linux administration, virtualization, automation, monitoring, and disaster recovery.
+> **Building enterprise-inspired infrastructure one project at a time.**
 
----
+Hi, I'm Damian. I built this homelab because I learn best by owning the entire problem: planning the system, deploying it, breaking it, recovering it, and understanding why it works.
 
-# 📊 Environment Overview
+What started as an unused gaming PC and a place to complete college labs has grown into a Proxmox-based platform for Linux administration, networking, cybersecurity practice, automation, monitoring, backups, container hosting, and private game servers used by friends and family.
 
-| Component | Status |
-|-----------|--------|
-| 🖥 Hypervisor | Proxmox VE 9.1.4 |
-| 🏷 Cluster | HomeLab-Cluster |
-| 📦 Infrastructure Services | 6 |
-| 🎮 Hosted Services | 4 |
-| 💾 Automated Backups | ✅ Proxmox Backup Server |
-| 🤖 Automation | ✅ Ansible + Bash |
-| 📈 Monitoring | ✅ Netdata + Pulse |
-| 🔒 Remote Access | ✅ Twingate Zero Trust |
-| 🌐 DNS | ✅ Pi-hole + Unbound |
-| 🛡 Firewall | ✅ Proxmox Datacenter + Node |
+My goal is not to build the most complicated environment possible. My goal is to build infrastructure that I understand, can recover, and can continue improving.
 
 ---
 
-# 📖 Documentation
+## Start Here
 
-## 🖥 Infrastructure
-
-- 📁 [Hardware Overview](01-Hardware/)
-- 🌐 [Network Architecture](02-Network/)
-- 🖥️ [Proxmox Virtualization Platform](03-Virtual-Infrastructure/systems/proxmox-virtualization-platform.md)
-
----
-
-## ⚙ Infrastructure Services
-
-See the [Infrastructure Services Labs index](05-Infrastructure-Services/) for architecture, implementation reasoning, operational procedures, sanitized examples, failure stories, and recovery notes.
-
-| Service | Status |
-|----------|--------|
-| [Pi-hole and Unbound](05-Infrastructure-Services/pi-hole-unbound/) | ✅ Documented |
-| [Twingate Connector](05-Infrastructure-Services/twingate/) | ✅ Documented |
-| [Proxmox Backup Server](05-Infrastructure-Services/proxmox-backup-server/) | ✅ Documented |
-| [Docker Application Host](05-Infrastructure-Services/docker/) | ✅ Documented |
-| [Pulse Monitoring](05-Infrastructure-Services/pulse/) | ✅ Documented |
-| [Ansible Maintenance Automation](05-Infrastructure-Services/ansible/) | ✅ Documented |
-
-These labs explain why each service exists, how it fits the architecture, what problems were encountered, how failures were diagnosed, and how the final design supports secure operations and recovery.
+| Section | What it explains |
+|---|---|
+| [My Journey](00-My-Journey/) | Why I built the lab, how it changed my learning, what it taught me, and where I want it to go |
+| [Infrastructure Overview](01-Infrastructure/) | Current hardware, network, storage constraints, virtualization design, and future architecture |
+| [Engineering Principles](02-Engineering-Principles/) | Planning, failure domains, automation, troubleshooting, security, and definition of done |
+| [Lessons and Failures](03-Lessons-and-Failures/) | RAM and storage planning, passthrough, backup failures, overengineering, and what changed afterward |
+| [Hosted Game Server Labs](04-Hosted-Services/) | Sanitized technical case studies and reusable scripts for Cozy Zen, ATM10, Palworld, and Enshrouded |
+| [Infrastructure Service Labs](05-Infrastructure-Services/) | Pi-hole, Twingate, PBS, Docker, Pulse, and Ansible architecture and troubleshooting |
+| [Game Hosting Portfolio](06-Game-Hosting/) | Why I self-host, tailored VMs versus AMP, and the evolution of the hosting strategy |
+| [Roadmap](08-Roadmap/) | Completed foundation, current work, career labs, network upgrades, and long-term smart-home goals |
+| [Assets](Assets/) | Planned diagrams, screenshots, and the visual privacy checklist |
 
 ---
 
-## 🎮 Hosted Services
+## Current Environment
 
-See the [Hosted Game Server Labs index](04-Hosted-Services/) for the complete portfolio section.
-
-| Service | Status |
-|----------|--------|
-| [Cozy Zen Modded Minecraft Automation Lab](04-Hosted-Services/cozy-zen-minecraft/) | ✅ Documented |
-| [ATM10 Modded Minecraft Server Lab](04-Hosted-Services/atm10-minecraft/) | ✅ Documented |
-| [Palworld Dedicated Server Lab](04-Hosted-Services/palworld/) | ✅ Documented |
-| [Enshrouded Dedicated Server Lab](04-Hosted-Services/enshrouded/) | ✅ Documented |
-
-The hosted-service projects include sanitized Bash scripts, systemd examples, backup and recovery procedures, health monitoring, SteamCMD workflows, RCON administration, Wine-based hosting, Playit.gg connectivity, resource tuning, and troubleshooting documentation.
-
----
-
-## 📈 Operations Documentation
-
-- 🤖 Automation
-- 📊 Monitoring
-- 💾 Backup Strategy
-- 🚨 Disaster Recovery
-- 📒 Engineering Journal
+| Area | Implementation |
+|---|---|
+| Hypervisor | Proxmox VE |
+| Physical host | Repurposed Intel Core i7-8700K gaming PC |
+| Memory | 32 GB DDR4 |
+| Main storage | 1 TB SSD with secondary 256 GB SSD |
+| Virtualization | KVM virtual machines and Linux containers |
+| DNS | Pi-hole and Unbound |
+| Remote administration | Twingate zero-trust access |
+| Backups | Proxmox Backup Server plus workload-specific backups |
+| Automation | Bash, systemd timers, and Ansible |
+| Containers | Docker, Portainer, n8n, and Dashy |
+| Monitoring | Proxmox, Pulse, Netdata, and application health checks |
+| External game access | Playit.gg tunnels where required |
+| Primary focus | Infrastructure, Linux, networking, automation, recovery, and documentation |
 
 ---
 
-# 🛠 Technologies Used
+## Featured Projects
 
-## Infrastructure
+### Cozy Zen Minecraft Automation Lab
 
-- Proxmox VE
-- Proxmox Backup Server
-- Debian Linux
-- Ubuntu Server
-- Linux Containers (LXC)
-- KVM Virtual Machines
-- Docker and Compose
+A short-lived family Minecraft server became the most complete custom automation project in the lab. It includes a systemd service, RCON wrapper, graceful backups, restore validation, restart warnings, health checks, watchdog recovery, cleanup, lock files, timers, and a terminal status dashboard.
 
-## Networking
+[View the Cozy Zen project →](04-Hosted-Services/cozy-zen-minecraft/)
 
-- Pi-hole
-- Unbound
-- Twingate
-- Playit.gg
-- Static IP Addressing
-- Managed Switching
-- QoS
-- Firewall Rules
+### Proxmox Backup Server
 
-## Automation
+PBS protects VMs and containers and shaped the lab's recovery-first design. The project documents API-token and TLS-fingerprint issues, datastore design, backup scheduling before maintenance, recursive self-backup problems, and restore verification.
 
-- Bash
-- Ansible
-- systemd Services and Timers
-- RCON
-- SteamCMD
-- Discord Webhooks
-- Cron
-- Automated VM Maintenance
+[View the PBS project →](05-Infrastructure-Services/proxmox-backup-server/)
 
-## Monitoring
+### Ansible Patch-and-Verify Workflow
 
-- Netdata
-- Pulse
-- Proxmox Monitoring
-- Custom Bash Health Checks and Status Dashboards
-- Spark Minecraft Profiling
+Routine Linux maintenance is coordinated after backups and includes readiness checks, updates, conditional reboots, service verification, one limited recovery attempt, local reports, and summarized notifications.
 
-## Game Server Platforms
+[View the Ansible project →](05-Infrastructure-Services/ansible/)
 
-- Minecraft Forge and NeoForge
-- Palworld Dedicated Server
-- Enshrouded Dedicated Server
-- Wine and Xvfb
+### Private Game Hosting
+
+Minecraft, Palworld, and Enshrouded servers demonstrate Forge/NeoForge administration, SteamCMD, RCON, Wine and Xvfb, UDP and TCP tunneling, resource tuning, backups, monitoring, and real-world troubleshooting.
+
+[View the game-hosting portfolio →](06-Game-Hosting/)
 
 ---
 
-# 🚀 Current Roadmap
+## How I Think About Infrastructure
 
-## Phase 1 — Foundation ✅
+### Plan before deployment
 
-- [x] Hardware Documentation
-- [x] Network Documentation
-- [x] Infrastructure Architecture
-- [x] Proxmox Virtualization Platform
+I now define the workload, constraints, access model, expected lifespan, backup needs, monitoring, and failure domain before creating the VM.
 
-## Phase 2 — Infrastructure Services ✅
+### Separate failures, not only applications
 
-- [x] Pi-hole and Unbound Documentation
-- [x] Twingate Documentation
-- [x] PBS Documentation
-- [x] Docker Documentation
-- [x] Pulse Documentation
-- [x] Ansible Documentation
+The important question is not only whether two services can run together. It is what else stops when that VM requires maintenance or fails.
 
-## Phase 3 — Hosted Services ✅
+### Automate the right things
 
-- [x] Cozy Zen Modded Minecraft Automation Lab
-- [x] ATM10 Modded Minecraft Server Lab
-- [x] Palworld Dedicated Server Lab
-- [x] Enshrouded Dedicated Server Lab
+Repetitive, time-consuming tasks deserve automation when the result can be logged, validated, and escalated if it fails. Built-in application features are preferred when they already solve the problem reliably.
 
-## Phase 4 — Enterprise Features
+### Design recovery before trusting automation
 
-- [ ] Rack Infrastructure
-- [ ] OPNsense Firewall
-- [ ] VLAN Segmentation
-- [ ] TrueNAS Storage
-- [ ] 24-Port Managed Switch
-- [ ] UPS Integration
-- [ ] Draw.io Network Diagrams
-- [ ] Rack Elevation Diagram
-- [ ] Configuration Management Database (CMDB)
+A successful backup job is not enough. Restore procedures, validation, staging, rollback, ownership correction, and post-recovery checks are part of the design.
+
+### Match effort to project lifespan
+
+Long-term services such as DNS, backups, remote access, and monitoring justify more engineering than a temporary game server that may exist for only a few weeks.
+
+[Read the complete engineering principles →](02-Engineering-Principles/)
 
 ---
 
-# 🔐 Public Repository Privacy Standard
+## Skills Demonstrated
 
-Configuration and code examples are sanitized before publication. This repository does not include:
-
-- Passwords, tokens, webhook URLs, API secrets, or SSH keys
-- Internal or public IP addresses and private DNS names
-- Twingate tenant, connector, resource, or deployment identifiers
-- PBS token secrets, certificate fingerprints, datastore details, or encryption material
-- Playit tunnel hostnames or claim information
-- Player names, UUIDs, or whitelist contents
-- World files, savegames, backups, application volumes, or production logs
-- Copyrighted game binaries, server packs, or mod files
+| Category | Hands-on experience |
+|---|---|
+| Virtualization | Proxmox VE, KVM VMs, LXC, snapshots, cloning, resource allocation, CPU tuning, passthrough troubleshooting |
+| Linux administration | Ubuntu and Debian, SSH, permissions, package management, process management, logs, filesystems, services |
+| Automation | Bash, Ansible, systemd services and timers, lock files, health checks, limited recovery, reporting |
+| Networking | DNS, Unbound, managed switching, static addressing, firewalls, Twingate, Playit.gg, TCP/UDP service checks |
+| Backup and recovery | PBS, workload backups, retention, archive validation, restore staging, rollback design |
+| Containers | Docker, Compose, Portainer, persistent volumes, application isolation |
+| Monitoring | Pulse, Netdata, Proxmox metrics, service checks, port checks, RCON checks, status dashboards |
+| Game infrastructure | Forge, NeoForge, SteamCMD, Wine, Xvfb, RCON, JVM planning, performance troubleshooting |
+| Security | Zero-trust remote access, private management paths, secret handling, repository sanitization, isolated labs |
+| Documentation | Architecture explanations, operations guides, troubleshooting records, sanitized code, roadmap planning |
 
 ---
 
-# 🎯 Project Goals
+## The Most Important Lessons
 
-This project exists to continuously develop practical enterprise infrastructure skills through hands-on experience.
+The most difficult problems were rarely solved by one perfect command. They were solved by isolating variables, preserving evidence, changing one thing at a time, waiting long enough to validate the result, and documenting what happened.
 
-Primary areas of focus include:
+Major lessons include:
 
-- Enterprise Virtualization
-- Linux Administration
-- Networking
-- Infrastructure Automation
-- Infrastructure Monitoring
-- Disaster Recovery
-- Documentation
-- Security
-- Troubleshooting
-- Capacity Planning
+- plan memory and storage for future growth,
+- avoid hardware passthrough unless it solves a real requirement,
+- group workloads by lifecycle and failure impact,
+- test restores instead of assuming backups are usable,
+- and avoid adding complexity that a short-lived project will never benefit from.
 
-The lab is continuously expanded as new technologies are learned and implemented.
+[Read the failure stories and lessons →](03-Lessons-and-Failures/)
+
+---
+
+## Current Roadmap
+
+The next stage focuses on making the environment easier to operate and easier for employers to understand:
+
+- evaluate AMP for casual game hosting,
+- document every VM and container,
+- create physical, logical, backup, and automation diagrams,
+- add sanitized screenshots,
+- build a CMDB-style inventory,
+- expand into Windows Server, Active Directory, Cisco networking, and isolated security labs,
+- and eventually redesign the physical network around OPNsense, VLANs, NAS storage, a rack, UPS, and structured cabling.
+
+[View the full roadmap →](08-Roadmap/)
+
+---
+
+## Public Repository Privacy Standard
+
+All examples are sanitized before publication. This repository excludes:
+
+- passwords, tokens, webhook URLs, API secrets, SSH keys, and encryption material,
+- internal or public IP addresses and private DNS names,
+- Twingate, Playit, PBS, and connector deployment identifiers,
+- player names, UUIDs, whitelist contents, and chat data,
+- world saves, backup archives, application volumes, and production logs,
+- and copyrighted game binaries, server packs, and mod files.
+
+The repository preserves the technical design and troubleshooting lessons without exposing the private environment.
+
+---
+
+## Long-Term Vision
+
+My goal is to grow this environment into infrastructure that can rival the complexity of a small business while remaining understandable and maintainable.
+
+The future design includes OPNsense, managed switching, VLAN segmentation, 10 Gb connectivity where practical, RAID-backed NAS storage, rack infrastructure, local security cameras, environmental monitoring, smart-home automation, private cloud services, and documented recovery procedures.
+
+I want this portfolio to show more than servers that happen to work. I want it to show how I plan, troubleshoot, recover, document, and improve real systems.
+
+> **The biggest accomplishment is not that the server works. It is that I understand why it works.**
