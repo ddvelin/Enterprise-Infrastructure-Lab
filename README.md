@@ -16,7 +16,7 @@
 | 🤖 Automation | ✅ Ansible + Bash |
 | 📈 Monitoring | ✅ Netdata + Pulse |
 | 🔒 Remote Access | ✅ Twingate Zero Trust |
-| 🌐 DNS | ✅ Pi-hole |
+| 🌐 DNS | ✅ Pi-hole + Unbound |
 | 🛡 Firewall | ✅ Proxmox Datacenter + Node |
 
 ---
@@ -33,14 +33,18 @@
 
 ## ⚙ Infrastructure Services
 
+See the [Infrastructure Services Labs index](05-Infrastructure-Services/) for architecture, implementation reasoning, operational procedures, sanitized examples, failure stories, and recovery notes.
+
 | Service | Status |
 |----------|--------|
-| Pi-hole | 🚧 In Progress |
-| Twingate Connector | 🚧 In Progress |
-| Proxmox Backup Server | 🚧 In Progress |
-| Docker | 🚧 In Progress |
-| Pulse | 🚧 In Progress |
-| Ansible | 🚧 In Progress |
+| [Pi-hole and Unbound](05-Infrastructure-Services/pi-hole-unbound/) | ✅ Documented |
+| [Twingate Connector](05-Infrastructure-Services/twingate/) | ✅ Documented |
+| [Proxmox Backup Server](05-Infrastructure-Services/proxmox-backup-server/) | ✅ Documented |
+| [Docker Application Host](05-Infrastructure-Services/docker/) | ✅ Documented |
+| [Pulse Monitoring](05-Infrastructure-Services/pulse/) | ✅ Documented |
+| [Ansible Maintenance Automation](05-Infrastructure-Services/ansible/) | ✅ Documented |
+
+These labs explain why each service exists, how it fits the architecture, what problems were encountered, how failures were diagnosed, and how the final design supports secure operations and recovery.
 
 ---
 
@@ -74,14 +78,17 @@ The hosted-service projects include sanitized Bash scripts, systemd examples, ba
 ## Infrastructure
 
 - Proxmox VE
+- Proxmox Backup Server
 - Debian Linux
 - Ubuntu Server
 - Linux Containers (LXC)
 - KVM Virtual Machines
+- Docker and Compose
 
 ## Networking
 
 - Pi-hole
+- Unbound
 - Twingate
 - Playit.gg
 - Static IP Addressing
@@ -126,14 +133,14 @@ The hosted-service projects include sanitized Bash scripts, systemd examples, ba
 - [x] Infrastructure Architecture
 - [x] Proxmox Virtualization Platform
 
-## Phase 2 — Infrastructure Services 🚧
+## Phase 2 — Infrastructure Services ✅
 
-- [ ] Pi-hole Documentation
-- [ ] Twingate Documentation
-- [ ] PBS Documentation
-- [ ] Docker Documentation
-- [ ] Pulse Documentation
-- [ ] Ansible Documentation
+- [x] Pi-hole and Unbound Documentation
+- [x] Twingate Documentation
+- [x] PBS Documentation
+- [x] Docker Documentation
+- [x] Pulse Documentation
+- [x] Ansible Documentation
 
 ## Phase 3 — Hosted Services ✅
 
@@ -160,11 +167,13 @@ The hosted-service projects include sanitized Bash scripts, systemd examples, ba
 
 Configuration and code examples are sanitized before publication. This repository does not include:
 
-- Passwords, tokens, webhook URLs, or SSH keys
-- Internal or public IP addresses
+- Passwords, tokens, webhook URLs, API secrets, or SSH keys
+- Internal or public IP addresses and private DNS names
+- Twingate tenant, connector, resource, or deployment identifiers
+- PBS token secrets, certificate fingerprints, datastore details, or encryption material
 - Playit tunnel hostnames or claim information
 - Player names, UUIDs, or whitelist contents
-- World files, savegames, backups, or production logs
+- World files, savegames, backups, application volumes, or production logs
 - Copyrighted game binaries, server packs, or mod files
 
 ---

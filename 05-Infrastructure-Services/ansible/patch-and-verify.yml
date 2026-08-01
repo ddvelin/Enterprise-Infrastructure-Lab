@@ -1,0 +1,94 @@
+---
+- name: Patch and verify managed Linux guests
+  hosts: managed_linux
+  become: true
+  serial: 1
+  gather_facts: true
+
+  vars:
+    minimum_free_mb: 2048
+    monitored_services:
+      - ssh
+    recovery_attempts: 1
+
+  pre_tasks:
+    - name: Confirm supported package manager
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.pkg_mgr == "apt"
+        fail_msg: "This example playbook supports apt-based guests only."
+
+    - name: Read root filesystem capacity
+      ansible.builtin.set_fact:
+        root_mount: "{{ ansible_facts.mounts | selectattr('mount', 'equalto', '/') | first }}"
+
+    - name: Confirm enough free disk space exists
+      ansible.builtin.assert:
+        that:
+          - (root_mount.size_available / 1024 / 1024) | int >= minimum_free_mb
+        fail_msg: "Insufficient free disk space for safe maintenance."
+
+  tasks:
+    - name: Refresh apt cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Upgrade installed packages
+      ansible.builtin.apt:
+        upgrade: dist
+        autoremove: true
+      register: package_update
+
+    - name: Check whether reboot is required
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: reboot_required
+
+    - name: Reboot when required
+      ansible.builtin.reboot:
+        reboot_timeout: 900
+        connect_timeout: 10
+        post_reboot_delay: 20
+      when: reboot_required.stat.exists
+
+    - name: Collect service facts
+      ansible.builtin.service_facts:
+
+    - name: Attempt one recovery for approved services
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: restarted
+      loop: "{{ monitored_services }}"
+      when:
+        - ansible_facts.services[item + '.service'] is defined
+        - ansible_facts.services[item + '.service'].state != 'running'
+      register: recovery_result
+      failed_when: false
+
+    - name: Refresh service facts after recovery
+      ansible.builtin.service_facts:
+
+    - name: Verify approved services are running
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.services[item + '.service'] is defined
+          - ansible_facts.services[item + '.service'].state == 'running'
+        fail_msg: "Required service {{ item }} is not healthy after maintenance."
+      loop: "{{ monitored_services }}"
+
+  post_tasks:
+    - name: Write a sanitized per-host summary locally
+      ansible.builtin.copy:
+        dest: "./reports/{{ inventory_hostname }}.txt"
+        mode: "0600"
+        content: |
+          Host: {{ inventory_hostname }}
+          Packages changed: {{ package_update.changed }}
+          Reboot required: {{ reboot_required.stat.exists }}
+          Verification: passed
+      delegate_to: localhost
+      become: false
+
+# The production workflow sends a summarized Discord message from a
+# separate local task. The webhook and real inventory remain private.
