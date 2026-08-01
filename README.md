@@ -48,10 +48,12 @@
 
 | Service | Status |
 |----------|--------|
-| Minecraft | 🚧 Documentation Planned |
+| [Cozy Zen Modded Minecraft Automation Lab](04-Hosted-Services/cozy-zen-minecraft/) | ✅ Documented |
 | ATM10 | 🚧 Documentation Planned |
 | Palworld | 🚧 Documentation Planned |
 | Enshrouded | 🚧 Documentation Planned |
+
+The Cozy Zen project includes sanitized Bash automation, systemd service and timer examples, backup and restore procedures, health monitoring, watchdog recovery, RCON administration, and a terminal status dashboard.
 
 ---
 
@@ -89,6 +91,8 @@
 
 - Bash
 - Ansible
+- systemd Services and Timers
+- RCON
 - Discord Webhooks
 - Cron
 - Automated VM Maintenance
@@ -98,6 +102,7 @@
 - Netdata
 - Pulse
 - Proxmox Monitoring
+- Custom Bash Health Checks and Status Dashboards
 
 ---
 
@@ -121,7 +126,7 @@
 
 ## Phase 3 — Hosted Services
 
-- [ ] Minecraft
+- [x] Cozy Zen Modded Minecraft Automation Lab
 - [ ] ATM10
 - [ ] Palworld
 - [ ] Enshrouded
@@ -131,7 +136,7 @@
 - [ ] Rack Infrastructure
 - [ ] OPNsense Firewall
 - [ ] VLAN Segmentation
-- [ ] TrueNAS Storage 
+- [ ] TrueNAS Storage
 - [ ] 24-Port Managed Switch
 - [ ] UPS Integration
 - [ ] Draw.io Network Diagrams
