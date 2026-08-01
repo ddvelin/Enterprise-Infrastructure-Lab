@@ -1,0 +1,28 @@
+services:
+  dashboard:
+    image: lissy93/dashy:latest
+    container_name: example-dashboard
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dashy/conf.yml:/app/user-data/conf.yml:ro
+    environment:
+      NODE_ENV: production
+
+  automation:
+    image: n8nio/n8n:latest
+    container_name: example-automation
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    env_file:
+      - .env
+
+volumes:
+  n8n_data:
+
+# This file is intentionally generic. The real deployment keeps .env,
+# credentials, workflow data, private URLs, and application volumes out of Git.
