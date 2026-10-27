@@ -2,9 +2,11 @@
 
 ## Purpose
 
-The lab is a Proxmox-based virtualization environment built from a repurposed gaming PC. It supports practical learning, private services, game hosting, automation, monitoring, backups, and future security and networking labs.
+The lab is a two-host Proxmox-based virtualization environment: a repurposed gaming PC for game hosting and a Dell PowerEdge R730D for infrastructure services, virtual machines, and experimentation. It supports practical learning, private services, game hosting, automation, monitoring, backups, and future security and networking labs.
 
 ## Current Hardware
+
+### Original i7-8700K host
 
 | Component | Current implementation |
 |---|---|
@@ -17,6 +19,19 @@ The lab is a Proxmox-based virtualization environment built from a repurposed ga
 | Hypervisor | Proxmox VE |
 
 The system started as an older gaming computer. Reusing existing hardware kept the project financially possible while still providing enough CPU capacity for multiple Linux guests and small private game servers.
+
+### Dell PowerEdge R730D infrastructure host
+
+| Component | Current implementation |
+|---|---|
+| Platform | Dell PowerEdge R730D |
+| Hypervisor | Proxmox VE 9.2 |
+| Boot storage | 400 GB Intel SSD |
+| VM storage | Four 1.2 TB SAS HDDs, ZFS striped mirrors, approximately 2.17 TiB usable |
+| Remote management | iDRAC and private Twingate access |
+| Primary role | Infrastructure services, virtual machines, and experiments |
+
+[Read the Dell R730D deployment case study](dell-r730d-proxmox.md).
 
 ## Hardware Lessons
 
@@ -36,7 +51,7 @@ The long-term storage goal is a dedicated NAS with large-capacity drives, redund
 
 ## Current Network
 
-The network is intentionally simple because the present home limits permanent cabling and rack deployment.
+The original site's network remains intentionally simple because permanent cabling and rack deployment are still planned. The Dell host is currently at a separate remote location; the diagram is a logical overview, not a complete physical topology.
 
 ```text
 Internet
@@ -45,9 +60,13 @@ ISP router and gateway
    |
 Managed switch
    |
-   +-- Proxmox server
+   +-- Original Proxmox game-server host
    +-- Primary desktop systems
    +-- Other wired devices
+
+Separate remote site (current Dell deployment):
+   +-- Dell R730D Proxmox infrastructure host
+   +-- Private remote administration via Twingate
 ```
 
 Pi-hole and Unbound provide the default DNS path for the network. Private addressing, router security controls, static addressing, and reservations are used where infrastructure requires predictable connectivity.
