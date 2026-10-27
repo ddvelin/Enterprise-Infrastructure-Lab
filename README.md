@@ -15,7 +15,8 @@ My goal is not to build the most complicated environment possible. My goal is to
 | Section | What it explains |
 |---|---|
 | [My Journey](00-My-Journey/) | Why I built the lab, how it changed my learning, what it taught me, and where I want it to go |
-| [Infrastructure Overview](01-Infrastructure/) | Current hardware, network, storage constraints, virtualization design, and future architecture |
+| [Infrastructure Overview](01-Infrastructure/) | Dual-host design, hardware, storage, virtualization, and future architecture |
+| [Dell R730D Deployment](01-Infrastructure/dell-r730d-proxmox.md) | Proxmox 9.2, ZFS striped mirrors, iDRAC, and secure remote management |
 | [Engineering Principles](02-Engineering-Principles/) | Planning, failure domains, automation, troubleshooting, security, and definition of done |
 | [Lessons and Failures](03-Lessons-and-Failures/) | RAM and storage planning, passthrough, backup failures, overengineering, and what changed afterward |
 | [Hosted Game Server Labs](04-Hosted-Services/) | Sanitized technical case studies and reusable scripts for Cozy Zen, ATM10, Palworld, and Enshrouded |
@@ -31,9 +32,9 @@ My goal is not to build the most complicated environment possible. My goal is to
 | Area | Implementation |
 |---|---|
 | Hypervisor | Proxmox VE |
-| Physical host | Repurposed Intel Core i7-8700K gaming PC |
-| Memory | 32 GB DDR4 |
-| Main storage | 1 TB SSD with secondary 256 GB SSD |
+| Physical hosts | Dell PowerEdge R730D (infrastructure and lab VMs); Intel Core i7-8700K system (game hosting) |
+| Original host memory | 32 GB DDR4 (expansion planned) |
+| Storage | Dell: 400 GB boot SSD plus four 1.2 TB SAS disks in a ~2.17 TiB ZFS striped-mirror pool; original host: 1 TB and 256 GB SSDs |
 | Virtualization | KVM virtual machines and Linux containers |
 | DNS | Pi-hole and Unbound |
 | Remote administration | Twingate zero-trust access |
@@ -47,6 +48,13 @@ My goal is not to build the most complicated environment possible. My goal is to
 ---
 
 ## Featured Projects
+
+### Dell PowerEdge R730D Infrastructure Host
+
+Expanded the lab to a second Proxmox host with four SAS disks configured as a ZFS striped-mirror pool, secure remote administration through Twingate, restrictive firewall policies, and VM templates. The original i7 host remains focused on game hosting.
+
+[View the Dell R730D deployment →](01-Infrastructure/dell-r730d-proxmox.md)
+
 
 ### Cozy Zen Minecraft Automation Lab
 
